@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20140809204930) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "child_resources", force: true do |t|
+  create_table "child_resources", force: :cascade do |t|
     t.integer  "parent_resource_id"
     t.boolean  "r_boolean"
     t.date     "r_date"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20140809204930) do
     t.datetime "updated_at"
   end
 
-  create_table "diff_resources", force: true do |t|
+  create_table "diff_resources", force: :cascade do |t|
     t.boolean  "r_boolean"
     t.date     "r_date"
     t.datetime "r_datetime"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20140809204930) do
     t.datetime "updated_at"
   end
 
-  create_table "grand_child_resources", force: true do |t|
+  create_table "grand_child_resources", force: :cascade do |t|
     t.integer  "child_resource_id"
     t.boolean  "r_boolean"
     t.date     "r_date"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20140809204930) do
     t.datetime "updated_at"
   end
 
-  create_table "handler_resources", force: true do |t|
+  create_table "handler_resources", force: :cascade do |t|
     t.boolean  "r_boolean"
     t.date     "r_date"
     t.datetime "r_datetime"
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 20140809204930) do
     t.datetime "updated_at"
   end
 
-  create_table "nonversionable_resources", force: true do |t|
+  create_table "nonversionable_resources", force: :cascade do |t|
     t.boolean  "r_boolean"
     t.date     "r_date"
     t.datetime "r_datetime"
@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 20140809204930) do
     t.datetime "updated_at"
   end
 
-  create_table "parent_resources", force: true do |t|
+  create_table "parent_resources", force: :cascade do |t|
     t.boolean  "r_boolean"
     t.date     "r_date"
     t.datetime "r_datetime"
@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 20140809204930) do
     t.datetime "updated_at"
   end
 
-  create_table "partially_exclusive_versionable_resources", force: true do |t|
+  create_table "partially_exclusive_versionable_resources", force: :cascade do |t|
     t.boolean  "r_boolean"
     t.date     "r_date"
     t.datetime "r_datetime"
@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 20140809204930) do
     t.datetime "updated_at"
   end
 
-  create_table "partially_inclusive_versionable_resources", force: true do |t|
+  create_table "partially_inclusive_versionable_resources", force: :cascade do |t|
     t.boolean  "r_boolean"
     t.date     "r_date"
     t.datetime "r_datetime"
@@ -139,7 +139,7 @@ ActiveRecord::Schema.define(version: 20140809204930) do
     t.datetime "updated_at"
   end
 
-  create_table "rubber_stamp_diff_attributes", force: true do |t|
+  create_table "rubber_stamp_diff_attributes", force: :cascade do |t|
     t.integer "version_attribute_id",                 null: false
     t.integer "index"
     t.string  "text"
@@ -150,7 +150,7 @@ ActiveRecord::Schema.define(version: 20140809204930) do
   add_index "rubber_stamp_diff_attributes", ["index"], name: "index_rubber_stamp_diff_attributes_on_index", using: :btree
   add_index "rubber_stamp_diff_attributes", ["version_attribute_id"], name: "rubber_stamp_diff_attriubtes_on_attribute", using: :btree
 
-  create_table "rubber_stamp_version_attributes", force: true do |t|
+  create_table "rubber_stamp_version_attributes", force: :cascade do |t|
     t.string  "version_type", null: false
     t.integer "version_id",   null: false
     t.string  "name",         null: false
@@ -160,7 +160,7 @@ ActiveRecord::Schema.define(version: 20140809204930) do
 
   add_index "rubber_stamp_version_attributes", ["version_type", "version_id"], name: "rubber_stamp_version_attriubtes_on_version", using: :btree
 
-  create_table "rubber_stamp_version_children", force: true do |t|
+  create_table "rubber_stamp_version_children", force: :cascade do |t|
     t.string  "version_type",                       null: false
     t.integer "version_id",                         null: false
     t.string  "versionable_type"
@@ -173,7 +173,7 @@ ActiveRecord::Schema.define(version: 20140809204930) do
   add_index "rubber_stamp_version_children", ["version_type", "version_id"], name: "rubber_stamp_version_children_on_version", using: :btree
   add_index "rubber_stamp_version_children", ["versionable_type", "versionable_id"], name: "rubber_stamp_version_children_on_versionable", using: :btree
 
-  create_table "rubber_stamp_versions", force: true do |t|
+  create_table "rubber_stamp_versions", force: :cascade do |t|
     t.string   "versionable_type",                   null: false
     t.integer  "versionable_id",                     null: false
     t.integer  "user_id"
@@ -195,11 +195,11 @@ ActiveRecord::Schema.define(version: 20140809204930) do
   add_index "rubber_stamp_versions", ["pending"], name: "index_rubber_stamp_versions_on_pending", using: :btree
   add_index "rubber_stamp_versions", ["versionable_type", "versionable_id"], name: "rubber_stamp_versions_on_versionable", using: :btree
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string "name", null: false
   end
 
-  create_table "validating_resources", force: true do |t|
+  create_table "validating_resources", force: :cascade do |t|
     t.boolean  "r_boolean"
     t.date     "r_date"
     t.datetime "r_datetime"
@@ -213,7 +213,7 @@ ActiveRecord::Schema.define(version: 20140809204930) do
     t.datetime "updated_at"
   end
 
-  create_table "versionable_resources", force: true do |t|
+  create_table "versionable_resources", force: :cascade do |t|
     t.boolean  "r_boolean"
     t.date     "r_date"
     t.datetime "r_datetime"
